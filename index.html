@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ラーメン注文サイト</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .menu-section {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .menu-section label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      color: #fff;
+      background: #007BFF;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      background: #0056b3;
+    }
+    .order-summary {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e9ecef;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ラーメン注文サイト</h1>
+    <form id="orderForm">
+      <!-- ラーメンの選択 -->
+      <div class="menu-section">
+        <h2>ラーメンを選ぶ</h2>
+        <label><input type="radio" name="ramen" value="塩" required> 塩ラーメン</label>
+        <label><input type="radio" name="ramen" value="醤油"> 醤油ラーメン</label>
+        <label><input type="radio" name="ramen" value="味噌"> 味噌ラーメン</label>
+      </div>
+      <!-- 単品の選択 -->
+      <div class="menu-section">
+        <h2>単品</h2>
+        <label><input type="checkbox" name="side" value="餃子"> 餃子</label>
+        <label><input type="checkbox" name="side" value="チャーハン"> チャーハン</label>
+      </div>
+      <!-- 飲みものの選択 -->
+      <div class="menu-section">
+        <h2>飲みもの</h2>
+        <label><input type="radio" name="drink" value="ビール" required> ビール</label>
+        <label><input type="radio" name="drink" value="ソフトドリンク"> ソフトドリンク</label>
+      </div>
+      <button type="submit" class="submit-btn">注文する</button>
+    </form>
+    <div id="orderSummary" class="order-summary" style="display:none;"></div>
+  </div>
+  
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // ページリロードを防ぐ
+      
+      // ラーメンの選択取得
+      var ramen = document.querySelector('input[name="ramen"]:checked').value;
+      // 飲みものの選択取得
+      var drink = document.querySelector('input[name="drink"]:checked').value;
+      
+      // 単品（複数選択可）の取得
+      var sides = [];
+      document.querySelectorAll('input[name="side"]:checked').forEach(function(el) {
+        sides.push(el.value);
+      });
+      
+      // 注文内容の組み立て
+      var summaryHTML = "<h2>ご注文内容</h2>";
+      summaryHTML += "<p><strong>ラーメン：</strong>" + ramen + "ラーメン</p>";
+      summaryHTML += "<p><strong>単品：</strong>" + (sides.length ? sides.join("、") : "なし") + "</p>";
+      summaryHTML += "<p><strong>飲みもの：</strong>" + drink + "</p>";
+      
+      // 注文内容を画面に表示
+      var summaryDiv = document.getElementById("orderSummary");
+      summaryDiv.innerHTML = summaryHTML;
+      summaryDiv.style.display = "block";
+    });
+  </script>
+</body>
+</html>

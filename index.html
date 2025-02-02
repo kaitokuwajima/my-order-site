@@ -1,186 +1,67 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ラーメン注文サイト</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    .menu-section {
-      margin-bottom: 20px;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-    .menu-section label {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-    .menu-image {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      margin-right: 10px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 16px;
-      color: #fff;
-      background: #007BFF;
-      border: none;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .btn:hover {
-      background: #0056b3;
-    }
-    .order-summary, .checkout-summary {
-      margin-top: 20px;
-      padding: 15px;
-      background: #e9ecef;
-      border-radius: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Works - AIと自動化で業務を革新</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>ラーメン注文サイト</h1>
-    <form id="orderForm">
-      <!-- ラーメンの選択 -->
-      <div class="menu-section">
-        <h2>ラーメンを選ぶ (900円)</h2>
-        <label>
-          <img src="https://via.placeholder.com/50?text=塩" alt="塩ラーメン" class="menu-image">
-          <input type="radio" name="ramen" value="塩" required> 塩ラーメン (900円)
-        </label>
-        <label>
-          <img src="https://via.placeholder.com/50?text=醤油" alt="醤油ラーメン" class="menu-image">
-          <input type="radio" name="ramen" value="醤油"> 醤油ラーメン (900円)
-        </label>
-        <label>
-          <img src="https://via.placeholder.com/50?text=味噌" alt="味噌ラーメン" class="menu-image">
-          <input type="radio" name="ramen" value="味噌"> 味噌ラーメン (900円)
-        </label>
-      </div>
-      <!-- 単品の選択 -->
-      <div class="menu-section">
-        <h2>単品</h2>
-        <label>
-          <img src="https://via.placeholder.com/50?text=餃子" alt="餃子" class="menu-image">
-          <input type="checkbox" name="side" value="餃子"> 餃子 (400円)
-        </label>
-        <label>
-          <img src="https://via.placeholder.com/50?text=チャーハン" alt="チャーハン" class="menu-image">
-          <input type="checkbox" name="side" value="チャーハン"> チャーハン (600円)
-        </label>
-      </div>
-      <!-- 飲みものの選択 -->
-      <div class="menu-section">
-        <h2>飲みもの</h2>
-        <label>
-          <img src="https://via.placeholder.com/50?text=ビール" alt="ビール" class="menu-image">
-          <input type="radio" name="drink" value="ビール" required> ビール (650円)
-        </label>
-        <label>
-          <img src="https://via.placeholder.com/50?text=ソフト" alt="ソフトドリンク" class="menu-image">
-          <input type="radio" name="drink" value="ソフトドリンク"> ソフトドリンク (300円)
-        </label>
-      </div>
-      <!-- 注文内容確認ボタン -->
-      <button type="submit" class="btn">注文内容確認</button>
-    </form>
-    <div id="orderSummary" class="order-summary" style="display:none;"></div>
-    <!-- お会計ボタン -->
-    <button id="checkoutBtn" class="btn" style="display:none;">お会計</button>
-    <div id="checkoutSummary" class="checkout-summary" style="display:none;"></div>
-  </div>
-  
-  <script>
-    // 各メニューの価格設定（円）
-    const prices = {
-      ramen: 900,
-      餃子: 400,
-      チャーハン: 600,
-      ビール: 650,
-      ソフトドリンク: 300
-    };
-    
-    // 注文内容確認時の処理
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // ページリロード防止
-      
-      // ラーメンの選択取得
-      const ramenChoice = document.querySelector('input[name="ramen"]:checked');
-      if (!ramenChoice) {
-        alert("ラーメンを選んでください");
-        return;
-      }
-      const ramen = ramenChoice.value;
-      
-      // 飲みものの選択取得
-      const drinkChoice = document.querySelector('input[name="drink"]:checked');
-      if (!drinkChoice) {
-        alert("飲みものを選んでください");
-        return;
-      }
-      const drink = drinkChoice.value;
-      
-      // 単品（複数選択可）の取得
-      let sides = [];
-      document.querySelectorAll('input[name="side"]:checked').forEach(function(el) {
-        sides.push(el.value);
-      });
-      
-      // 注文内容の表示
-      let summaryHTML = "<h2>ご注文内容</h2>";
-      summaryHTML += "<p><strong>ラーメン：</strong>" + ramen + "ラーメン (¥" + prices.ramen + ")</p>";
-      summaryHTML += "<p><strong>単品：</strong>" + (sides.length ? sides.map(side => side + " (¥" + prices[side] + ")").join("、") : "なし") + "</p>";
-      summaryHTML += "<p><strong>飲みもの：</strong>" + drink + " (¥" + prices[drink] + ")</p>";
-      
-      const summaryDiv = document.getElementById("orderSummary");
-      summaryDiv.innerHTML = summaryHTML;
-      summaryDiv.style.display = "block";
-      
-      // お会計ボタンを表示
-      document.getElementById("checkoutBtn").style.display = "inline-block";
-      
-      // 注文内容を一時的に保存
-      window.currentOrder = { ramen, sides, drink };
-    });
-    
-    // お会計ボタン押下時の処理
-    document.getElementById("checkoutBtn").addEventListener("click", function() {
-      let total = 0;
-      if (window.currentOrder) {
-        total += prices.ramen; // ラーメン
-        window.currentOrder.sides.forEach(function(side) {
-          total += prices[side];
-        });
-        total += prices[window.currentOrder.drink]; // 飲みもの
-      }
-      
-      const checkoutDiv = document.getElementById("checkoutSummary");
-      checkoutDiv.innerHTML = "<h2>お会計</h2><p>合計金額: ¥" + total + "</p>";
-      checkoutDiv.innerHTML += "<p>※本サンプルでは電子決済サービスとの連携は実装していません。<br>実際の決済処理にはStripeやPayPalなどの専用APIとの統合が必要です。</p>";
-      checkoutDiv.style.display = "block";
-    });
-  </script>
+    <header>
+        <h1>Future Works</h1>
+    </header>
+
+    <main>
+        <section class="mission">
+            <h2>私たちのミッション</h2>
+            <div class="mission-container">
+                <img src="mission_image.png" alt="Future Worksのビジョン">
+                <div class="mission-text">未来の働き方を創造し、テクノロジーの力で人々の可能性を最大限に引き出す。</div>
+            </div>
+        </section>
+
+        <section class="services">
+            <h2>提供サービス</h2>
+            <div class="service-container">
+                <a href="services.html" class="service-button">広告バナー・ポスターの自動生成</a>
+                <a href="services.html" class="service-button">Webサイトのデザイン案作成</a>
+                <a href="services.html" class="service-button">ブログ記事の自動生成</a>
+                <a href="services.html" class="service-button">業務フローの最適化提案</a>
+                <a href="services.html" class="service-button">AIによるスケジュール最適化</a>
+            </div>
+            <a href="services.html" class="more-button">すべてのサービスを見る</a>
+        </section>
+
+        <section class="profile">
+            <h2>自己紹介</h2>
+            <div class="profile-container">
+                <img src="profile_image.jpeg" alt="桑島 海斗" class="profile-img">
+                <div class="profile-text">
+                    <h3>Owner: 桑島 海斗</h3>
+                    <p>現役理学療法士 × AI × プログラミング<br>ミニマリスト思考で、時短と効率を追求！</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2>お問い合わせ</h2>
+            <p>詳細なご相談は、公式LINEからお気軽にどうぞ。</p>
+            <a href="https://page.line.me/046yhhzy" class="line-button">公式LINEはこちら</a>
+        </section>
+
+        <section class="sns">
+            <h2>SNS一覧</h2>
+            <div class="sns-links">
+                <a href="https://www.instagram.com/future_works_kuwajimakaito/" target="_blank" class="sns-button instagram">Instagram</a>
+                <a href="https://www.youtube.com/channel/UCRaF0SzZ-9pcbwL2-Ha8uhw" target="_blank" class="sns-button youtube">YouTube</a>
+                <a href="https://www.tiktok.com/@futureworkskuwajimakaito?_t=ZS-8tYS97RekdD&_r=1" target="_blank" class="sns-button tiktok">TikTok</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Future Works | すべての権利を保有</p>
+    </footer>
 </body>
 </html>

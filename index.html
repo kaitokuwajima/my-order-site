@@ -27,14 +27,20 @@
       border-bottom: 1px solid #ddd;
     }
     .menu-section label {
-      display: block;
-      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
       font-size: 16px;
     }
-    .submit-btn {
-      display: block;
-      width: 100%;
-      padding: 10px;
+    .menu-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
       font-size: 16px;
       color: #fff;
       background: #007BFF;
@@ -42,10 +48,10 @@
       cursor: pointer;
       margin-top: 10px;
     }
-    .submit-btn:hover {
+    .btn:hover {
       background: #0056b3;
     }
-    .order-summary {
+    .order-summary, .checkout-summary {
       margin-top: 20px;
       padding: 15px;
       background: #e9ecef;
@@ -59,53 +65,121 @@
     <form id="orderForm">
       <!-- ラーメンの選択 -->
       <div class="menu-section">
-        <h2>ラーメンを選ぶ</h2>
-        <label><input type="radio" name="ramen" value="塩" required> 塩ラーメン</label>
-        <label><input type="radio" name="ramen" value="醤油"> 醤油ラーメン</label>
-        <label><input type="radio" name="ramen" value="味噌"> 味噌ラーメン</label>
+        <h2>ラーメンを選ぶ (900円)</h2>
+        <label>
+          <img src="https://via.placeholder.com/50?text=塩" alt="塩ラーメン" class="menu-image">
+          <input type="radio" name="ramen" value="塩" required> 塩ラーメン (900円)
+        </label>
+        <label>
+          <img src="https://via.placeholder.com/50?text=醤油" alt="醤油ラーメン" class="menu-image">
+          <input type="radio" name="ramen" value="醤油"> 醤油ラーメン (900円)
+        </label>
+        <label>
+          <img src="https://via.placeholder.com/50?text=味噌" alt="味噌ラーメン" class="menu-image">
+          <input type="radio" name="ramen" value="味噌"> 味噌ラーメン (900円)
+        </label>
       </div>
       <!-- 単品の選択 -->
       <div class="menu-section">
         <h2>単品</h2>
-        <label><input type="checkbox" name="side" value="餃子"> 餃子</label>
-        <label><input type="checkbox" name="side" value="チャーハン"> チャーハン</label>
+        <label>
+          <img src="https://via.placeholder.com/50?text=餃子" alt="餃子" class="menu-image">
+          <input type="checkbox" name="side" value="餃子"> 餃子 (400円)
+        </label>
+        <label>
+          <img src="https://via.placeholder.com/50?text=チャーハン" alt="チャーハン" class="menu-image">
+          <input type="checkbox" name="side" value="チャーハン"> チャーハン (600円)
+        </label>
       </div>
       <!-- 飲みものの選択 -->
       <div class="menu-section">
         <h2>飲みもの</h2>
-        <label><input type="radio" name="drink" value="ビール" required> ビール</label>
-        <label><input type="radio" name="drink" value="ソフトドリンク"> ソフトドリンク</label>
+        <label>
+          <img src="https://via.placeholder.com/50?text=ビール" alt="ビール" class="menu-image">
+          <input type="radio" name="drink" value="ビール" required> ビール (650円)
+        </label>
+        <label>
+          <img src="https://via.placeholder.com/50?text=ソフト" alt="ソフトドリンク" class="menu-image">
+          <input type="radio" name="drink" value="ソフトドリンク"> ソフトドリンク (300円)
+        </label>
       </div>
-      <button type="submit" class="submit-btn">注文する</button>
+      <!-- 注文内容確認ボタン -->
+      <button type="submit" class="btn">注文内容確認</button>
     </form>
     <div id="orderSummary" class="order-summary" style="display:none;"></div>
+    <!-- お会計ボタン -->
+    <button id="checkoutBtn" class="btn" style="display:none;">お会計</button>
+    <div id="checkoutSummary" class="checkout-summary" style="display:none;"></div>
   </div>
   
   <script>
+    // 各メニューの価格設定（円）
+    const prices = {
+      ramen: 900,
+      餃子: 400,
+      チャーハン: 600,
+      ビール: 650,
+      ソフトドリンク: 300
+    };
+    
+    // 注文内容確認時の処理
     document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // ページリロードを防ぐ
+      e.preventDefault(); // ページリロード防止
       
       // ラーメンの選択取得
-      var ramen = document.querySelector('input[name="ramen"]:checked').value;
+      const ramenChoice = document.querySelector('input[name="ramen"]:checked');
+      if (!ramenChoice) {
+        alert("ラーメンを選んでください");
+        return;
+      }
+      const ramen = ramenChoice.value;
+      
       // 飲みものの選択取得
-      var drink = document.querySelector('input[name="drink"]:checked').value;
+      const drinkChoice = document.querySelector('input[name="drink"]:checked');
+      if (!drinkChoice) {
+        alert("飲みものを選んでください");
+        return;
+      }
+      const drink = drinkChoice.value;
       
       // 単品（複数選択可）の取得
-      var sides = [];
+      let sides = [];
       document.querySelectorAll('input[name="side"]:checked').forEach(function(el) {
         sides.push(el.value);
       });
       
-      // 注文内容の組み立て
-      var summaryHTML = "<h2>ご注文内容</h2>";
-      summaryHTML += "<p><strong>ラーメン：</strong>" + ramen + "ラーメン</p>";
-      summaryHTML += "<p><strong>単品：</strong>" + (sides.length ? sides.join("、") : "なし") + "</p>";
-      summaryHTML += "<p><strong>飲みもの：</strong>" + drink + "</p>";
+      // 注文内容の表示
+      let summaryHTML = "<h2>ご注文内容</h2>";
+      summaryHTML += "<p><strong>ラーメン：</strong>" + ramen + "ラーメン (¥" + prices.ramen + ")</p>";
+      summaryHTML += "<p><strong>単品：</strong>" + (sides.length ? sides.map(side => side + " (¥" + prices[side] + ")").join("、") : "なし") + "</p>";
+      summaryHTML += "<p><strong>飲みもの：</strong>" + drink + " (¥" + prices[drink] + ")</p>";
       
-      // 注文内容を画面に表示
-      var summaryDiv = document.getElementById("orderSummary");
+      const summaryDiv = document.getElementById("orderSummary");
       summaryDiv.innerHTML = summaryHTML;
       summaryDiv.style.display = "block";
+      
+      // お会計ボタンを表示
+      document.getElementById("checkoutBtn").style.display = "inline-block";
+      
+      // 注文内容を一時的に保存
+      window.currentOrder = { ramen, sides, drink };
+    });
+    
+    // お会計ボタン押下時の処理
+    document.getElementById("checkoutBtn").addEventListener("click", function() {
+      let total = 0;
+      if (window.currentOrder) {
+        total += prices.ramen; // ラーメン
+        window.currentOrder.sides.forEach(function(side) {
+          total += prices[side];
+        });
+        total += prices[window.currentOrder.drink]; // 飲みもの
+      }
+      
+      const checkoutDiv = document.getElementById("checkoutSummary");
+      checkoutDiv.innerHTML = "<h2>お会計</h2><p>合計金額: ¥" + total + "</p>";
+      checkoutDiv.innerHTML += "<p>※本サンプルでは電子決済サービスとの連携は実装していません。<br>実際の決済処理にはStripeやPayPalなどの専用APIとの統合が必要です。</p>";
+      checkoutDiv.style.display = "block";
     });
   </script>
 </body>

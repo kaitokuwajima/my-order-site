@@ -1,74 +1,268 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future Works - AIと自動化で業務を革新</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Future Works - AIと自動化で業務を革新</title>
+
+  <!-- ▼ ここにCSSを直接記述しているので、style.cssは不要です ▼ -->
+  <style>
+    /* 全体のリセットとベース設定 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #1b2735, #090a0f);
+      color: #ffffff;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+    header,
+    footer {
+      text-align: center;
+      padding: 20px 0;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 0.05em;
+      color: #00ffd5; /* ちょっと未来感のあるアクセントカラー */
+      margin-bottom: 10px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    h2::after {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 2px;
+      background: #00ffd5;
+      margin: 6px 0 0;
+    }
+
+    /* ミッション部分 */
+    .mission-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+    .mission-container img {
+      max-width: 300px;
+      border: 2px solid #00ffd5;
+      border-radius: 8px;
+    }
+    .mission-text {
+      flex: 1;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* サービス一覧 */
+    .services .service-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .service-box {
+      flex: 1 1 calc(50% - 20px);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      min-width: 250px;
+      transition: box-shadow 0.3s ease;
+    }
+    .service-box:hover {
+      box-shadow: 0 0 12px #00ffd5;
+    }
+    .service-box h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #00ffd5;
+    }
+    .service-box p {
+      font-size: 0.95rem;
+    }
+    .more-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00ffd5;
+      color: #000;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.3s;
+    }
+    .more-button:hover {
+      opacity: 0.8;
+    }
+
+    /* お問い合わせ */
+    .contact p {
+      margin-bottom: 15px;
+    }
+    .line-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #32c832;
+      color: #000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: opacity 0.3s;
+    }
+    .line-button:hover {
+      opacity: 0.8;
+    }
+
+    /* SNS一覧 */
+    .sns-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .sns-button {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #00ffd5;
+      color: #000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+    .sns-button:hover {
+      box-shadow: 0 0 8px #00ffd5;
+      background: #00e6c0;
+    }
+    /* 個別で色を変えたい場合は .instagram などのクラスにCSSを当てる */
+
+    footer p {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      .service-container {
+        flex-direction: column;
+      }
+      .service-box {
+        flex: 1 1 100%;
+      }
+      .mission-container {
+        flex-direction: column;
+      }
+      .mission-container img {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Future Works</h1>
-    </header>
+  <header>
+    <h1>Future Works</h1>
+  </header>
 
-    <main>
-        <section class="mission">
-            <h2>私たちのミッション</h2>
-            <div class="mission-container">
-                <img src="mission_image.png" alt="Future Worksのビジョン">
-                <div class="mission-text">未来の働き方を創造し、テクノロジーの力で人々の可能性を最大限に引き出す。</div>
-            </div>
-        </section>
+  <main>
+    <section class="mission">
+      <h2>私たちのミッション</h2>
+      <div class="mission-container">
+        <!-- ▼ mission_image.png の代わりに1x1ピクセルの仮画像(base64)を埋め込み -->
+        <img
+          src="30B233EC-BB13-4D5E-9587-EE4FDAC17894.PNG"
+          alt="Future Worksのビジョン（仮画像）" />
+        <div class="mission-text">
+          未来の働き方を創造し、テクノロジーの力で人々の可能性を最大限に引き出す。
+        </div>
+      </div>
+    </section>
 
-        <section class="services">
-            <h2>提供サービス</h2>
-            <div class="service-container">
-                <div class="service-box">
-                    <h3>広告バナー・ポスターの自動生成</h3>
-                    <p>AIを活用して、魅力的な広告バナーやポスターを自動生成。</p>
-                </div>
-                <div class="service-box">
-                    <h3>Webサイトのデザイン案作成</h3>
-                    <p>HTML/CSSを活用したモダンなWebデザイン案を提案。</p>
-                </div>
-                <div class="service-box">
-                    <h3>ブログ記事の自動生成</h3>
-                    <p>キーワードを入力するだけで、AIが高品質な記事を自動生成。</p>
-                </div>
-                <div class="service-box">
-                    <h3>業務フローの最適化提案</h3>
-                    <p>エクセル自動化・マクロ開発を通じて業務の効率化を支援。</p>
-                </div>
-                <div class="service-box">
-                    <h3>AIによるスケジュール最適化</h3>
-                    <p>Googleカレンダーと連携し、最適なスケジュールを自動提案。</p>
-                </div>
-            </div>
-            <a href="services.html" class="more-button">すべてのサービスを見る</a>
-        </section>
+    <section class="services">
+      <h2>提供サービス</h2>
+      <div class="service-container">
+        <div class="service-box">
+          <h3>広告バナー・ポスターの自動生成</h3>
+          <p>AIを活用して、魅力的な広告バナーやポスターを自動生成。</p>
+        </div>
+        <div class="service-box">
+          <h3>Webサイトのデザイン案作成</h3>
+          <p>HTML/CSSを活用したモダンなWebデザイン案を提案。</p>
+        </div>
+        <div class="service-box">
+          <h3>ブログ記事の自動生成</h3>
+          <p>キーワードを入力するだけで、AIが高品質な記事を自動生成。</p>
+        </div>
+        <div class="service-box">
+          <h3>業務フローの最適化提案</h3>
+          <p>エクセル自動化・マクロ開発を通じて業務の効率化を支援。</p>
+        </div>
+        <div class="service-box">
+          <h3>AIによるスケジュール最適化</h3>
+          <p>Googleカレンダーと連携し、最適なスケジュールを自動提案。</p>
+        </div>
+      </div>
+      <a href="services.html" class="more-button">すべてのサービスを見る</a>
+    </section>
 
-        <section class="contact">
-            <h2>お問い合わせ</h2>
-            <p>詳細なご相談は、公式LINEからお気軽にどうぞ。</p>
-            <a href="https://page.line.me/046yhhzy" class="line-button">公式LINEはこちら</a>
-        </section>
+    <section class="contact">
+      <h2>お問い合わせ</h2>
+      <p>詳細なご相談は、公式LINEからお気軽にどうぞ。</p>
+      <a href="https://page.line.me/046yhhzy" class="line-button">公式LINEはこちら</a>
+    </section>
 
-        <section class="sns">
-            <h2>SNS一覧</h2>
-            <div class="sns-links">
-                <a href="https://www.instagram.com/future_works_kuwajimakaito/" target="_blank" class="sns-button instagram">Instagram</a>
-                <a href="https://www.youtube.com/channel/UCRaF0SzZ-9pcbwL2-Ha8uhw" target="_blank" class="sns-button youtube">YouTube</a>
-                <a href="https://www.tiktok.com/@futureworkskuwajimakaito?_t=ZS-8tYS97RekdD&_r=1" target="_blank" class="sns-button tiktok">TikTok</a>
-                
-                <!-- ここからX（旧Twitter）のリンクを追加 -->
-                <a href="https://x.com/WorksFutur76916" target="_blank" class="sns-button x">X</a>
-                <!-- ここまで追加 -->
-            </div>
-        </section>
-    </main>
+    <section class="sns">
+      <h2>SNS一覧</h2>
+      <div class="sns-links">
+        <a
+          href="https://www.instagram.com/future_works_kuwajimakaito/"
+          target="_blank"
+          class="sns-button instagram"
+          >Instagram</a
+        >
+        <a
+          href="https://www.youtube.com/channel/UCRaF0SzZ-9pcbwL2-Ha8uhw"
+          target="_blank"
+          class="sns-button youtube"
+          >YouTube</a
+        >
+        <a
+          href="https://www.tiktok.com/@futureworkskuwajimakaito?_t=ZS-8tYS97RekdD&_r=1"
+          target="_blank"
+          class="sns-button tiktok"
+          >TikTok</a
+        >
 
-    <footer>
-        <p>&copy; 2025 Future Works | すべての権利を保有</p>
-    </footer>
+        <!-- X（旧Twitter）のリンクを追加 -->
+        <a
+          href="https://x.com/WorksFutur76916"
+          target="_blank"
+          class="sns-button x"
+          >X</a
+        >
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Future Works | すべての権利を保有</p>
+  </footer>
 </body>
 </html>

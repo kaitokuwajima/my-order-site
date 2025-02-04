@@ -7,7 +7,7 @@
 
   <!-- ▼ ここにCSSを直接記述しているので、style.cssは不要です ▼ -->
   <style>
-    /* 全体のリセットとベース設定 */
+    /* 全体リセットとベース設定 */
     * {
       margin: 0;
       padding: 0;
@@ -28,7 +28,7 @@
     header h1 {
       font-size: 2.2rem;
       letter-spacing: 0.05em;
-      color: #00ffd5; /* ちょっと未来感のあるアクセントカラー */
+      color: #00ffd5; /* 未来感のあるアクセントカラー */
       margin-bottom: 10px;
     }
 
@@ -55,7 +55,7 @@
       margin: 6px 0 0;
     }
 
-    /* ミッション部分 */
+    /* ミッション */
     .mission-container {
       display: flex;
       flex-wrap: wrap;
@@ -63,9 +63,10 @@
       gap: 20px;
     }
     .mission-container img {
-      max-width: 300px;
+      max-width: 400px;
       border: 2px solid #00ffd5;
       border-radius: 8px;
+      object-fit: cover;
     }
     .mission-text {
       flex: 1;
@@ -73,8 +74,26 @@
       line-height: 1.8;
     }
 
+    /* 自己紹介 */
+    .profile {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .profile h2 {
+      margin-bottom: 15px;
+    }
+    .profile p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
     /* サービス一覧 */
-    .services .service-container {
+    .services {
+      /* IDをつけてジャンプ先にできるように */
+    }
+    .service-container {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
@@ -152,7 +171,6 @@
       box-shadow: 0 0 8px #00ffd5;
       background: #00e6c0;
     }
-    /* 個別で色を変えたい場合は .instagram などのクラスにCSSを当てる */
 
     footer p {
       font-size: 0.9rem;
@@ -182,20 +200,40 @@
   </header>
 
   <main>
+    <!-- ミッション -->
     <section class="mission">
       <h2>私たちのミッション</h2>
       <div class="mission-container">
-        <!-- ▼ mission_image.png の代わりに1x1ピクセルの仮画像(base64)を埋め込み -->
+        <!-- ▼ 実際にアップロードした画像のURLをsrcに設定してください -->
         <img
-          src="30B233EC-BB13-4D5E-9587-EE4FDAC17894.PNG"
-          alt="Future Worksのビジョン（仮画像）" />
+          src="https://raw.githubusercontent.com/USER/REPO/main/futuristic-city.jpg"
+          alt="未来的な都市の風景"
+        />
         <div class="mission-text">
-          未来の働き方を創造し、テクノロジーの力で人々の可能性を最大限に引き出す。
+          未来の働き方を創造し、テクノロジーの力で人々の可能性を最大限に引き出すこと。
+          <br />
+          社会やライフスタイルが変化し続ける中で、効率化や自動化だけでなく、より柔軟で
+          想像力豊かな働き方を実現することを目指しています。
         </div>
       </div>
     </section>
 
-    <section class="services">
+    <!-- 自己紹介 -->
+    <section class="profile">
+      <h2>自己紹介</h2>
+      <p>
+        はじめまして。<strong>桑島海斗</strong>です。現役理学療法士として働くかたわら、
+        副業でプログラミングやAIについて学習しています。<br /><br />
+        現代社会は本当にやることが多く、心身ともに疲れ切っている方が少なくありません。
+        私自身も日々の仕事と新しい学びとの両立に挑戦中です。<br /><br />
+        だからこそ、テクノロジーの力を借りて、みんながよりラクで楽しく
+        生きられるよう手助けしたいと考えています。Future Worksを通じて、
+        そんな世界を一緒に作っていきましょう。
+      </p>
+    </section>
+
+    <!-- 提供サービス -->
+    <section class="services" id="services-section">
       <h2>提供サービス</h2>
       <div class="service-container">
         <div class="service-box">
@@ -219,15 +257,20 @@
           <p>Googleカレンダーと連携し、最適なスケジュールを自動提案。</p>
         </div>
       </div>
-      <a href="services.html" class="more-button">すべてのサービスを見る</a>
+      <!-- 「すべてのサービスを見る」は同ページ内のアンカーへジャンプ -->
+      <a href="#services-section" class="more-button"
+        >すべてのサービスを見る</a
+      >
     </section>
 
+    <!-- お問い合わせ -->
     <section class="contact">
       <h2>お問い合わせ</h2>
       <p>詳細なご相談は、公式LINEからお気軽にどうぞ。</p>
       <a href="https://page.line.me/046yhhzy" class="line-button">公式LINEはこちら</a>
     </section>
 
+    <!-- SNS -->
     <section class="sns">
       <h2>SNS一覧</h2>
       <div class="sns-links">
@@ -249,8 +292,7 @@
           class="sns-button tiktok"
           >TikTok</a
         >
-
-        <!-- X（旧Twitter）のリンクを追加 -->
+        <!-- X（旧Twitter）のリンク -->
         <a
           href="https://x.com/WorksFutur76916"
           target="_blank"

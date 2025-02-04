@@ -84,6 +84,12 @@
     .profile h2 {
       margin-bottom: 15px;
     }
+    .profile-photo {
+      width: 150px;         /* 表示したいサイズに合わせて調整 */
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: block;       /* 中央寄せにする場合は下記のmargin: 0 auto;などを追加 */
+    }
     .profile p {
       font-size: 1rem;
       line-height: 1.7;
@@ -91,7 +97,7 @@
 
     /* サービス一覧 */
     .services {
-      /* IDをつけてジャンプ先にできるように */
+      /* IDをつけてアンカーリンク先にできるように */
     }
     .service-container {
       display: flex;
@@ -204,16 +210,15 @@
     <section class="mission">
       <h2>私たちのミッション</h2>
       <div class="mission-container">
-        <!-- ▼ 実際にアップロードした画像のURLをsrcに設定してください -->
+        <!-- ▼ 未来的な都市のイメージ画像：実際のURLやファイルに置き換えてください -->
         <img
           src="https://raw.githubusercontent.com/USER/REPO/main/futuristic-city.jpg"
           alt="未来的な都市の風景"
         />
         <div class="mission-text">
           未来の働き方を創造し、テクノロジーの力で人々の可能性を最大限に引き出すこと。
-          <br />
-          社会やライフスタイルが変化し続ける中で、効率化や自動化だけでなく、より柔軟で
-          想像力豊かな働き方を実現することを目指しています。
+          社会やライフスタイルが変化し続ける中で、効率化や自動化だけでなく、
+          より柔軟で想像力豊かな働き方を実現することを目指しています。
         </div>
       </div>
     </section>
@@ -221,14 +226,20 @@
     <!-- 自己紹介 -->
     <section class="profile">
       <h2>自己紹介</h2>
+      <!-- ▼ 桑島海斗さんの写真：適宜URLやファイル名を置き換えてください -->
+      <img
+        src="https://raw.githubusercontent.com/USER/REPO/main/kuwajima-kaito.jpg"
+        alt="桑島海斗の写真"
+        class="profile-photo"
+      />
       <p>
         はじめまして。<strong>桑島海斗</strong>です。現役理学療法士として働くかたわら、
         副業でプログラミングやAIについて学習しています。<br /><br />
         現代社会は本当にやることが多く、心身ともに疲れ切っている方が少なくありません。
         私自身も日々の仕事と新しい学びとの両立に挑戦中です。<br /><br />
-        だからこそ、テクノロジーの力を借りて、みんながよりラクで楽しく
-        生きられるよう手助けしたいと考えています。Future Worksを通じて、
-        そんな世界を一緒に作っていきましょう。
+        だからこそ、テクノロジーの力を借りて、みんながよりラクで楽しく生きられるよう
+        手助けしたいと考えています。Future Worksを通じて、そんな世界を
+        一緒に作っていきましょう。
       </p>
     </section>
 
@@ -257,7 +268,7 @@
           <p>Googleカレンダーと連携し、最適なスケジュールを自動提案。</p>
         </div>
       </div>
-      <!-- 「すべてのサービスを見る」は同ページ内のアンカーへジャンプ -->
+      <!-- 「すべてのサービスを見る」は同じページのセクション上部へアンカーリンク -->
       <a href="#services-section" class="more-button"
         >すべてのサービスを見る</a
       >

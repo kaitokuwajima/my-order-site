@@ -106,13 +106,15 @@
       gap: 20px;
     }
     .service-box {
-      flex: 1 1 calc(50% - 20px);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 20px;
-      min-width: 250px;
-      transition: box-shadow 0.3s ease;
+     display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #ff8c00; /* オレンジ（目立ってクリックしたくなる） */
+  color: #fff; /* 白文字で読みやすく */
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
     }
     .service-box:hover {
       box-shadow: 0 0 12px #00ffd5;
